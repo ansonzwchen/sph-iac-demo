@@ -21,7 +21,11 @@ provider "tencentcloud" {
   assume_role_with_web_identity {
     provider_id        = "TerraformCloud"
     role_arn           = var.tfc_role_arn
-    session_name       = "tfc-${terraform.workspace}-${formatdate("YYYYMMDDhhmmss", timestamp())}"
+    # Tencent STS validates RoleSessionName against ^[a-zA-Z0-9_=,.@-]{2,32}$
+    # We keep it static (no timestamp / no interpolation) to avoid any
+    # whitespace or empty-segment issue. Audit traceability is preserved
+    # because CloudAudit records the source IP + JWT sub anyway.
+    session_name       = "tfc_webcore_prod"
     session_duration   = 3600
     web_identity_token = data.external.tfc_jwt.result["jwt"]
   }
