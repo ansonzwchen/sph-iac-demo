@@ -11,9 +11,9 @@ variable "demo_bucket" {
 }
 
 variable "workspace_tag" {
-  description = "Tag used in canary key for audit traceability"
+  description = "Tag used in canary key for audit traceability. Must match TFC workspace name (and the workspace segment in OIDC sub claim) so a single identity string flows through identity, state path, and workload path."
   type        = string
-  default     = "webcore-prod"
+  default     = "sph-iac-demo"
 }
 
 variable "tfc_role_arn" {
