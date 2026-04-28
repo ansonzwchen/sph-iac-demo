@@ -11,7 +11,7 @@ terraform {
   backend "cos" {
     region  = "ap-singapore"
     bucket  = "sph-demo-1365626084"
-    prefix  = "tfstate/webcore-prod/"
+    prefix  = "tfstate/sph-iac-demo/"
     acl     = "private"
     encrypt = true
   }
